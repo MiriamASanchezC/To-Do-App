@@ -1,8 +1,9 @@
 export function Tabs(props){
 
-    const {todos} = props
+    const {todos, selectedTab, setSelectedTab} = props
 
-    const tabs = ['All', 'Open', 'Completed']
+    {/*Aqui definimos un arreglo para crear un boton para cada pestaña*/}
+    const tabs = ['All', 'Open', 'Completed'] 
     return (
         <nav className="tab-container">
              {/*Recorre el array tabs, ejecutando el codigo dentro de la funcion para cada elemento*/}
@@ -18,12 +19,17 @@ export function Tabs(props){
                 const numOfTasks = tab === 'All' ? todos.length : tab === 'Open' ? todos.filter(val => val.complete).length:
                                                     todos.filter(val => val.complete).length
                 return(
-                    
-                    <button key={tabindex} className="tab-button">{/* key es un id unico en una lista de elementos */}
+                   // Si la pestaña actual tab es la que esta seleccionada, se agrega la clase tab-selected para resaltarla
+                   //Al hacer clic en una pestaña se actualiza selectedTab usando setSelectedTab cambiando la vista de tareas
+                    <button onClick={() =>{
+                        setSelectedTab(tab) //aqui si le damos clic nos cambiara a la tab que esta seleccionada
+                    }} key={tabindex} className={"tab-button" + (tab === selectedTab ? 'tab-selected': ' ')}>{/* key es un id unico en una lista de elementos */}
+                
                         <h4>{tab} <span>({numOfTasks})</span></h4>
                     </button>
                 )
             })}
+            <hr />
         </nav>
     )
 }

@@ -1,6 +1,6 @@
 export function TodoCard(props){
  {/*Estamos deconstruyendo de Todolist para agarrar los todos */}
-    const {todo} = props
+    const {todo, handleDeleteTodo, todoIndex} = props
    
 
     return (
@@ -11,7 +11,9 @@ export function TodoCard(props){
                 <button disabled= {todo.complete}>
                     <h6>Done</h6>
                 </button>
-                <button>
+                <button onClick={() => { 
+                    handleDeleteTodo(todoIndex)
+                }}>
                     <h6>Delete</h6>
                 </button>
             </div>
